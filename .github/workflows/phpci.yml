@@ -33,6 +33,9 @@ jobs:
       - name: Setup project
         run: make setup
 
+      - name: Generate Application Key
+        run: php artisan key:generate
+
       - name: Clear Config Cache
         run: php artisan config:clear
 
