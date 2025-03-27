@@ -27,8 +27,17 @@ jobs:
       - name: PHP Security Checker
         uses: StephaneBour/actions-php-security-checker@1.1
 
+      - name: Create SQLite Database
+        run: touch database/database.sqlite
+
       - name: Setup project
         run: make setup
+
+      - name: Clear Config Cache
+        run: php artisan config:clear
+
+      - name: Run Migrations
+        run: php artisan migrate --force
 
       - name: Check lint
         run: make lint
