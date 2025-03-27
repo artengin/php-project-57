@@ -1,0 +1,20 @@
+{
+    "Already registered?": "Уже зарегистрированы?",
+    "Click me": "Нажми меня",
+    "Confirm": "Подтверждение",
+    "Confirm Password": "Подтверждение",
+    "Email": "Email",
+    "Email Password Reset Link": "Сбросить пароль",
+    "Forgot your password?": "Забыли пароль?",
+    "Hello from Hexlet!": "Привет от Хекслета!",
+    "It is simple task manager!": "Это простой менеджер задач на Laravel",
+    "Log in": "Войти",
+    "Log out": "Выход",
+    "Name": "Имя",
+    "Password": "Пароль",
+    "Profile": "Профиль",
+    "Register": "Зарегистрировать",
+    "Registration": "Регистрация",
+    "Remember me": "Запомнить меня",
+    "Task manager": "Менеджер задач"
+}
