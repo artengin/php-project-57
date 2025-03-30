@@ -3,6 +3,7 @@ start:
 
 setup:
 	composer install
+	cp -n .env.example .env
 	npm ci
 	npm run build
 
