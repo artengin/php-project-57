@@ -16,7 +16,7 @@
                 <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                     Задачи
                 </x-nav-link>
-                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.*')">
                     Статусы
                 </x-nav-link>
                 <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
