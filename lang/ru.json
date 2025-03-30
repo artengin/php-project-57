@@ -13,6 +13,7 @@
     "Forgot your password?": "Забыли пароль?",
     "Hello from Hexlet!": "Привет от Хекслета!",
     "It is simple task manager!": "Это простой менеджер задач на Laravel",
+    "Labels": "Метки",
     "Log in": "Войти",
     "Log out": "Выход",
     "Name": "Имя",
@@ -22,5 +23,6 @@
     "Registration": "Регистрация",
     "Remember me": "Запомнить меня",
     "Statuses": "Статусы",
-    "Task manager": "Менеджер задач"
+    "Task manager": "Менеджер задач",
+    "Tasks": "Задачи"
 }

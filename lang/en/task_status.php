@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'index' => 'Статусы',
+    'index' => 'Statuses',
     'id' => 'ID',
     'destroy' => 'Destroy',
     'created_at' => 'Created at',
@@ -9,7 +9,8 @@ return [
     'edit' => 'Edit',
     'actions' => 'Actions',
     'create' => 'Create status',
-    'store' => 'Store',
+    'change' => 'Change status',
+    'store' => 'Create',
     'update' => 'Update',
     'deleted' => 'Status successfully deleted',
     'stored' => 'Status successfully created',

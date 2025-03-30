@@ -13,6 +13,7 @@
     "Update": "Update",
     "Hello from Hexlet!": "Hello from Hexlet!",
     "It is simple task manager!": "It is simple task manager!",
+    "Labels": "Labels",
     "Log in": "Log in",
     "Log out": "Log out",
     "Name": "Name",
@@ -22,5 +23,6 @@
     "Registration": "Registration",
     "Remember me": "Remember me",
     "Statuses": "Statuses",
-    "Task manager": "Task manager" 
+    "Task manager": "Task manager",
+    "Tasks": "Tasks"
 }
