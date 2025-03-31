@@ -34,9 +34,9 @@ class TaskStatusController extends Controller
         return redirect(route('task_statuses.index'));
     }
 
-    public function edit(TaskStatus $taskStatus)
+    public function edit(TaskStatus $taskStatus): View
     {
-        return view('task_status.edit', ['status' => $taskStatus,]);
+        return view('task_status.edit', ['status' => $taskStatus]);
     }
 
     public function update(ValidateRequest $request, TaskStatus $taskStatus): RedirectResponse
@@ -48,6 +48,13 @@ class TaskStatusController extends Controller
 
     public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
+        if ($taskStatus->tasks()->exists()) {
+            flash()->error(__('task_status.has_tasks'));
+            return back()->withErrors([
+                'message' => __('task_status.has_tasks'),
+            ]);
+        }
+
         $taskStatus->delete();
         flash()->success(__('task_status.deleted'));
         return redirect(route('task_statuses.index'));

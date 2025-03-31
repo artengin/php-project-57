@@ -14,4 +14,9 @@ class Label extends Model
         'name',
         'description',
     ];
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }

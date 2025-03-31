@@ -13,14 +13,14 @@
 
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                    {{ __('Tasks') }}
+                <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('tasks.*')">
+                    {{ __('task.index') }}
                 </x-nav-link>
                 <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.*')">
-                    {{ __('Statuses') }}
+                    {{ __('task_status.index') }}
                 </x-nav-link>
                 <x-nav-link :href="route('labels.index')" :active="request()->routeIs('labels.*')">
-                    {{ __('Labels') }}
+                    {{ __('label.index') }}
                 </x-nav-link>
             </div>
             <div>
