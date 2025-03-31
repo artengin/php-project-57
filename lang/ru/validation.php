@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+    'something_went_wrong' => 'Упс! Что-то пошло не так:',
     'accepted'             => 'Вы должны принять :attribute.',
     'accepted_if'          => 'Вы должны принять :attribute, когда :other соответствует :value.',
     'active_url'           => 'Значение поля :attribute должно быть действительным URL адресом.',
@@ -156,7 +156,7 @@ return [
     'starts_with' => 'Поле :attribute должно начинаться с одного из следующих значений: :values',
     'string' => 'Значение поля :attribute должно быть строкой.',
     'timezone' => 'Значение поля :attribute должно быть действительным часовым поясом.',
-    'unique' => 'Такое значение поля :attribute уже существует.',
+    'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'Загрузка файла из поля :attribute не удалась.',
     'uppercase' => 'Значение поля :attribute должно быть в верхнем регистре.',
     'url' => 'Значение поля :attribute должно быть корректным UUID.',
