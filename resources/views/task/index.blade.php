@@ -35,9 +35,9 @@
                 {{ html()->closeModelForm() }}
             </div>
 
-                @auth
+                @can('create', App\Models\Task::class)
                     {{ html()->a(route('tasks.create'), __('task.create'))->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow') }}
-                @endauth
+                @endcan
             </div>
             
            
