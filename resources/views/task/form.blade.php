@@ -23,6 +23,6 @@
     ->class('rounded border-gray-300 w-1/3 mt-3') }}
 
 
-{{ html()->label(__('task.labels'), 'labels') }}
-{{ html()->select('labels', $labels->pluck('name', 'id')->toArray())
+{{ html()->label(__('task.labels'), 'labels[]') }}
+{{ html()->select('labels[]', $labels->pluck('name', 'id')->toArray())
     ->class('rounded border-gray-300 w-1/3 mt-3')->multiple() }}
