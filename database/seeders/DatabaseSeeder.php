@@ -21,6 +21,5 @@ class DatabaseSeeder extends Seeder
             LabelSeeder::class,
             TaskSeeder::class
         ]);
-
     }
 }
