@@ -41,7 +41,7 @@
                             <a
                                 href="{{ route('login') }}"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-4 border border-gray-400 rounded shadow">
-                            {{ __('Log in') }}
+                            {{ __('Login') }}
                             </a>
 
                             @if (Route::has('register'))
