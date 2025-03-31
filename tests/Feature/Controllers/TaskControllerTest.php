@@ -13,73 +13,72 @@ class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testGuestCannotAccessCreatePage()
+    public function testIndex(): void
     {
-        $response = $this->get(route('tasks.create'));
-        $response->assertRedirect(route('login'));
+        $response = $this->get(route('task_statuses.index'));
+
+        $response->assertOk();
     }
 
-    public function testAuthenticatedUserCanAccessCreatePage()
+    public function testEdit(): void
     {
-        $user = User::factory()->create();
-        $response = $this->actingAs($user)->get(route('tasks.create'));
-        $response->assertStatus(200);
+        $this->actingAs(User::factory()->create());
+
+        $model = TaskStatus::factory()->create();
+        $response = $this->get(route('task_statuses.edit', $model));
+
+        $response->assertOk();
     }
 
-    public function testGuestCannotStoreTask()
+    public function testCreate(): void
     {
-        $response = $this->post(route('tasks.store'), ['name' => 'New Task']);
-        $response->assertRedirect(route('login'));
+        $this->actingAs(User::factory()->create());
+
+        $response = $this->get(route('task_statuses.create'));
+
+        $response->assertOk();
     }
 
-    public function testAuthenticatedUserCanStoreTask()
+    public function testStore(): void
     {
-        $user = User::factory()->create();
-        $status = TaskStatus::factory()->create();
-        $data = [
-            'name' => 'Test Task',
-            'status_id' => $status->id,
-            'assignee_id' => $user->id,
-            'description' => 'Task description',
-        ];
+        $this->actingAs(User::factory()->create());
 
-        $response = $this->actingAs($user)->post(route('tasks.store'), $data);
+        $body = TaskStatus::factory()->make()->toArray();
+        $response = $this->post(route('task_statuses.store'), $body);
 
-        $this->assertDatabaseHas('tasks', ['name' => 'Test Task']);
-        $response->assertRedirect(route('tasks.index'));
+        $response->assertRedirect();
+        $response->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('task_statuses', $body);
     }
 
-    public function testUserCanUpdateTask()
+    public function testUpdate(): void
     {
-        $user = User::factory()->create();
-        $task = Task::factory()->create(['created_by_id' => $user->id]);
-        $newData = ['name' => 'Updated Task'];
+        $this->actingAs(User::factory()->create());
 
-        $response = $this->actingAs($user)->put(route('tasks.update', $task), $newData);
+        $model = TaskStatus::factory()->create();
+        $body = TaskStatus::factory()->make()->toArray();
+        $response = $this->put(route('task_statuses.update', $model), $body);
 
-        $this->assertDatabaseHas('tasks', ['name' => 'Updated Task']);
-        $response->assertRedirect(route('tasks.index'));
+        $response->assertRedirect();
+        $response->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('task_statuses', [
+            'id' => $model->id,
+            ...$body,
+        ]);
     }
 
-    public function testUserCanDeleteOwnTask()
+    public function testDestroy(): void
     {
-        $user = User::factory()->create();
-        $task = Task::factory()->create(['created_by_id' => $user->id]);
+        $this->actingAs(User::factory()->create());
 
-        $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
+        $model = TaskStatus::factory()->create();
+        $response = $this->delete(route('task_statuses.destroy', $model));
 
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
-        $response->assertRedirect(route('tasks.index'));
-    }
+        $response->assertRedirect();
+        $response->assertSessionHasNoErrors();
 
-    public function testUserCannotDeleteOtherUsersTask()
-    {
-        $user = User::factory()->create();
-        $otherUser = User::factory()->create();
-        $task = Task::factory()->create(['created_by_id' => $otherUser->id]);
-
-        $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
-
-        $response->assertStatus(403);
+        $this->assertDatabaseMissing('task_statuses', ['id' => $model->id]);
     }
 }

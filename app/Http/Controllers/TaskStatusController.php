@@ -12,7 +12,7 @@ class TaskStatusController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->authorizeResource(TaskStatus::class);
     }
 
     public function index(): View

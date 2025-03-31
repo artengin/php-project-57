@@ -2,18 +2,13 @@
 
 namespace App\Policies;
 
+use App\Models\Label;
 use App\Models\User;
-use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
-class TaskPolicy
+class LabelPolicy
 {
     public function viewAny(?User $user): bool
-    {
-        return true;
-    }
-
-    public function view(?User $user, Task $task): bool
     {
         return true;
     }
@@ -23,13 +18,13 @@ class TaskPolicy
         return Auth::check();
     }
 
-    public function update(User $user, Task $task): bool
+    public function update(User $user, Label $label): bool
     {
         return Auth::check();
     }
 
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, Label $label): bool
     {
-        return $task->createdBy()->is($user);
+        return Auth::check();
     }
 }

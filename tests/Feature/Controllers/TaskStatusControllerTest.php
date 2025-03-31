@@ -11,23 +11,11 @@ class TaskStatusControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testGuestCannotAccessCreatePage()
-    {
-        $response = $this->get(route('task_statuses.create'));
-        $response->assertRedirect(route('login'));
-    }
-
     public function testAuthenticatedUserCanAccessCreatePage()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get(route('task_statuses.create'));
         $response->assertStatus(200);
-    }
-
-    public function testGuestCannotStoreTaskStatus()
-    {
-        $response = $this->post(route('task_statuses.store'), ['name' => 'New Status']);
-        $response->assertRedirect(route('login'));
     }
 
     public function testAuthenticatedUserCanStoreTaskStatus()

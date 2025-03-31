@@ -2,18 +2,13 @@
 
 namespace App\Policies;
 
+use App\Models\TaskStatus;
 use App\Models\User;
-use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
-class TaskPolicy
+class TaskStatusPolicy
 {
     public function viewAny(?User $user): bool
-    {
-        return true;
-    }
-
-    public function view(?User $user, Task $task): bool
     {
         return true;
     }
@@ -23,13 +18,13 @@ class TaskPolicy
         return Auth::check();
     }
 
-    public function update(User $user, Task $task): bool
+    public function update(User $user, TaskStatus $taskStatus): bool
     {
         return Auth::check();
     }
 
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, TaskStatus $taskStatus): bool
     {
-        return $task->createdBy()->is($user);
+        return Auth::check();
     }
 }
