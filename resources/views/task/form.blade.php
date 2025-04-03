@@ -10,8 +10,10 @@
 
 {{ html()->label(__('task.status'), 'status_id') }}
 {{ html()->select('status_id', 
-    ['' => ''] + $statuses->pluck('name', 'id')->toArray())
-    ->class('rounded border-gray-300 w-1/3 mt-3') }}
+    $statuses)
+    ->class('rounded border-gray-300 w-1/3 mt-3')
+    ->placeholder('') 
+}}
 
 @error('status_id')
     <div class="text-rose-600">{{ $message }}</div>
@@ -19,8 +21,10 @@
 
 {{ html()->label(__('task.executor'), 'assigned_to_id') }}
 {{ html()->select('assigned_to_id', 
-    ['' => ''] + $assignees->pluck('name', 'id')->toArray())
-    ->class('rounded border-gray-300 w-1/3 mt-3') }}
+    $assignees)
+    ->class('rounded border-gray-300 w-1/3 mt-3')
+    ->placeholder('')
+}}
 
 
 {{ html()->label(__('task.labels'), 'labels[]') }}

@@ -11,26 +11,29 @@
                 <div class="mb-4">
                 {{ html()->form('GET', route('tasks.index'))->open() }}
 
-                {{ html()->select('filter[status_id]', 
-                    ['' => __('task.status')] + $statuses->pluck('name', 'id')->toArray(),
-                    request('filter.status_id'))
-                    ->class('rounded border-gray-300 my-3')
-                }}
-                
-                {{ html()->select('filter[created_by_id]',
-                    ['' => __('task.created_by_id')] + $users->pluck('name', 'id')->toArray(), 
-                    request('filter.created_by_id'))
-                    ->class('rounded border-gray-300 my-3')
-                }}
-                
-                {{ html()->select('filter[assigned_to_id]', 
-                    ['' => __('task.assigned_to_id')] + $users->pluck('name', 'id')->toArray(), 
-                    request('filter.assigned_to_id'))
-                    ->class('rounded border-gray-300 my-3')
-                }}
+                    {{ html()->select('filter[status_id]', 
+                        $statuses,
+                        Arr::get($filter, 'status_id'))
+                        ->class('rounded border-gray-300 my-3')
+                        ->placeholder(__('task.status'))
+                    }}
+                    
+                    {{ html()->select('filter[created_by_id]',
+                        $users, 
+                        Arr::get($filter, 'created_by_id'))
+                        ->class('rounded border-gray-300 my-3')
+                        ->placeholder(__('task.created_by_id'))
+                    }}
+                    
+                    {{ html()->select('filter[assigned_to_id]', 
+                        $users, 
+                        Arr::get($filter, 'assigned_to_id'))
+                        ->class('rounded border-gray-300 my-3')
+                        ->placeholder(__('task.assigned_to_id'))
+                    }}
 
-                {{ html()->submit(__('task.accept_filter'))
-                    ->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow my-3') }}
+                    {{ html()->submit(__('task.accept_filter'))
+                        ->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow my-3') }}
 
                 {{ html()->closeModelForm() }}
             </div>

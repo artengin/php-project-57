@@ -22,29 +22,30 @@ class TaskController extends Controller
         $this->authorizeResource(Task::class);
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
         $tasks = QueryBuilder::for(Task::class)
-        ->allowedFilters([
-            AllowedFilter::exact('status_id'),
-            AllowedFilter::exact('created_by_id'),
-            AllowedFilter::exact('assigned_to_id'),
-        ])
-        ->with('status', 'assignedTo', 'createdBy')
-        ->paginate();
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->with('status', 'assignedTo', 'createdBy')
+            ->paginate();
 
-        $users = User::all();
-        $statuses = TaskStatus::all();
+        $users = User::pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id');
+        $filter = $request->input('filter');
 
-        return view('task.index', compact('tasks', 'users', 'statuses'));
+        return view('task.index', compact('tasks', 'users', 'statuses', 'filter'));
     }
 
     public function create(): View
     {
         return view('task.create', [
             'task' => new Task(),
-            'statuses' => TaskStatus::all(),
-            'assignees' => User::all(),
+            'statuses' => TaskStatus::pluck('name', 'id'),
+            'assignees' => User::pluck('name', 'id'),
             'labels' => Label::all()
         ]);
     }
@@ -74,8 +75,8 @@ class TaskController extends Controller
     public function edit(Task $task): View
     {
         return view('task.edit', [
-            'statuses' => TaskStatus::all(),
-            'assignees' => User::all(),
+            'statuses' => TaskStatus::pluck('name', 'id'),
+            'assignees' => User::pluck('name', 'id'),
             'task' => $task,
             'labels' => Label::all()
         ]);
