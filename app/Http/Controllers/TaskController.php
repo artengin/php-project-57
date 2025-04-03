@@ -94,9 +94,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task): RedirectResponse
     {
-        if (auth()->id() !== $task->created_by_id) {
-            abort(403);
-        }
+        $this->authorize('delete', $task);
+
         $task->delete();
         flash()->success(__('task.deleted'));
         return redirect(route('tasks.index'));

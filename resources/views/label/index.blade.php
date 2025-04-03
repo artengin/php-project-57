@@ -7,9 +7,9 @@
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-4xl">
                     {{ __('label.index') }}       
                 </h1> 
-                @auth
+                @can('create', App\Models\Label::class)
                     {{ html()->a(route('labels.create'), __('label.create'))->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow') }}
-                @endauth
+                @endcan
             </div>
             
            
@@ -35,9 +35,8 @@
                         <td class="py-2">{{ $label->name }}</td>
                         <td class="py-2">{{ $label->description }}</td>
                         <td class="py-2">{{ $label->created_at->format('d.m.Y') }}</td>
-                        @auth
-
-                            <td class="py-2">
+                        <td class="py-2">
+                            @can('delete', $label)
                                 {{ html()->a(route('labels.destroy', $label), __('label.destroy'))
                                     ->class('btn btn-sm btn-danger text-red-600 hover:text-red-900')
                                     ->attributes([
@@ -45,10 +44,11 @@
                                         'data-confirm' => __('Are you sure?'),
                                         'rel' => 'nofollow'
                                     ]) }}
+                            @endcan
+                            @can('update', $label)
                                 {{ html()->a(route('labels.edit', $label), __('label.edit'))->class('btn btn-sm btn-outline-primary text-blue-600 hover:text-blue-900') }}
-                            </td>
-
-                        @endauth
+                            @endcan
+                        </td>
                     </tr>
 
                 @endforeach

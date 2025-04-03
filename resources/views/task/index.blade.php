@@ -38,9 +38,9 @@
                 {{ html()->closeModelForm() }}
             </div>
 
-                @auth
+                @can('create', App\Models\Task::class)
                     {{ html()->a(route('tasks.create'), __('task.create'))->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow') }}
-                @endauth
+                @endcan
             </div>
             
            
@@ -54,6 +54,7 @@
                     <th scope="col" class="py-2">{{ __('task.created_by_id') }}</th>
                     <th scope="col" class="py-2">{{ __('task.assigned_to_id') }}</th>
                     <th scope="col" class="py-2">{{ __('task.created_at') }}</th>
+
                     @auth
                         <th scope="col" class="py-2">{{ __('task.actions') }}</th>
                     @endauth
@@ -74,8 +75,6 @@
                         <td class="py-2">{{ $task->createdBy->name }}</td>
                         <td class="py-2">{{ $task->assignedTo?->name }}</td>
                         <td class="py-2">{{ $task->created_at->format('d.m.Y') }}</td>
-                        @auth
-
                             <td class="py-2">
                                 @can('delete', $task)
                                     {{ html()->a(route('tasks.destroy', $task), __('task.destroy'))
@@ -86,12 +85,11 @@
                                             'rel' => 'nofollow'
                                         ]) }}
                                 @endcan
-                                {{ html()->a(route('tasks.edit', $task), __('task.edit'))->class('btn btn-sm btn-outline-primary text-blue-600 hover:text-blue-900') }}
+                                @can('update', $task)
+                                    {{ html()->a(route('tasks.edit', $task), __('task.edit'))->class('btn btn-sm btn-outline-primary text-blue-600 hover:text-blue-900') }}
+                                @endcan
                             </td>
-
-                        @endauth
                     </tr>
-
                 @endforeach
 
                 </tbody>

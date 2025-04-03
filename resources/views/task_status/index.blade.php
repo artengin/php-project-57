@@ -7,9 +7,9 @@
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-4xl">
                     {{ __('task_status.index') }}       
                 </h1> 
-                @auth
+                @can('create', App\Models\TaskStatus::class)
                     {{ html()->a(route('task_statuses.create'), __('task_status.create'))->class('bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow') }}
-                @endauth
+                @endcan
             </div>
             
            
@@ -33,9 +33,8 @@
                         <td class="py-2">{{ $status->id }}</td>
                         <td class="py-2">{{ $status->name }}</td>
                         <td class="py-2">{{ $status->created_at->format('d.m.Y') }}</td>
-                        @auth
-
-                            <td class="py-2">
+                        <td class="py-2">
+                            @can('delete', $status)
                                 {{ html()->a(route('task_statuses.destroy', $status), __('task_status.destroy'))
                                     ->class('btn btn-sm btn-danger text-red-600 hover:text-red-900')
                                     ->attributes([
@@ -43,10 +42,11 @@
                                         'data-confirm' => __('Are you sure?'),
                                         'rel' => 'nofollow'
                                     ]) }}
+                            @endcan
+                            @can('update', $status)
                                 {{ html()->a(route('task_statuses.edit', $status), __('task_status.edit'))->class('btn btn-sm btn-outline-primary text-blue-600 hover:text-blue-900') }}
-                            </td>
-
-                        @endauth
+                            @endcan
+                        </td>
                     </tr>
 
                 @endforeach
