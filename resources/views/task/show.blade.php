@@ -11,7 +11,7 @@
                 <p class="my-1">{{ __('task.status') }}: {{ $task->status->name }}</p>
                 <p class="my-1">{{ __('task.description') }}: {{ $task->description  }}</p>
             </div>
-            @if (count($task->labels) !== 0)
+            @if ($task->labels->isNotEmpty())
                 <p>{{ __('task.labels') }}:
                 <div class="flex my-1">
                     @foreach($task->labels as $label)
