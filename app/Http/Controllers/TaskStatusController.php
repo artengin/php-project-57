@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\TaskStatus;
-use App\Http\Requests\TaskStatus\ValidateRequest;
+use App\Http\Requests\TaskStatus\StoreRequest;
+use App\Http\Requests\TaskStatus\UpdateRequest;
 
 class TaskStatusController extends Controller
 {
@@ -27,7 +28,7 @@ class TaskStatusController extends Controller
         return view('task_status.create', compact('status'));
     }
 
-    public function store(ValidateRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         TaskStatus::create($request->validated());
         flash()->success(__('task_status.stored'));
@@ -39,7 +40,7 @@ class TaskStatusController extends Controller
         return view('task_status.edit', ['status' => $taskStatus]);
     }
 
-    public function update(ValidateRequest $request, TaskStatus $taskStatus): RedirectResponse
+    public function update(UpdateRequest $request, TaskStatus $taskStatus): RedirectResponse
     {
         $taskStatus->update($request->validated());
         flash()->success(__('task_status.updated'));

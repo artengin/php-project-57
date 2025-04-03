@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Task;
 
-class StoreRequest extends BaseRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -13,6 +15,13 @@ class StoreRequest extends BaseRequest
             'assigned_to_id' => 'nullable|exists:users,id',
             'labels' => 'nullable|array',
             'labels.*' => 'exists:labels,id',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => __('task.validation.name.unique'),
         ];
     }
 }

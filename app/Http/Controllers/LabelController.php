@@ -6,7 +6,7 @@ use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\Label\ValidateRequest;
+use App\Http\Requests\Label\StoreRequest;
 use App\Http\Requests\Label\UpdateRequest;
 
 class LabelController extends Controller
@@ -28,7 +28,7 @@ class LabelController extends Controller
         return view('label.create', compact('label'));
     }
 
-    public function store(ValidateRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         Label::create($request->validated());
         flash()->success(__('label.stored'));

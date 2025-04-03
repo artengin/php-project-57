@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Task;
 
-class UpdateRequest extends BaseRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -13,6 +15,13 @@ class UpdateRequest extends BaseRequest
             'assigned_to_id' => 'nullable|exists:users,id',
             'labels' => 'array',
             'labels.*' => 'exists:labels,id',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => __('task.validation.name.unique'),
         ];
     }
 }

@@ -4,8 +4,16 @@ namespace App\Http\Requests\Label;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BaseRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|unique:labels,name',
+            'description' => 'nullable|string',
+        ];
+    }
+
     public function messages(): array
     {
         return [

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Label;
+namespace App\Http\Requests\TaskStatus;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -9,15 +9,14 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:labels,name,' . $this->label->id,
-            'description' => 'nullable|string',
+            'name' => 'required|unique:task_statuses,name',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.unique' => __('label.validation.name.unique'),
+            'name.unique' => __('task_status.validation.name.unique'),
         ];
     }
 }
