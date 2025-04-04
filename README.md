@@ -11,8 +11,6 @@ Task Manager  in Laravel
 [![Actions Status](https://github.com/artengin/php-project-57/actions/workflows/phpci.yml/badge.svg)](https://github.com/artengin/php-project-57/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/bcf77b10f0c78a903440/maintainability)](https://codeclimate.com/github/artengin/php-project-57/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/bcf77b10f0c78a903440/test_coverage)](https://codeclimate.com/github/artengin/php-project-57/test_coverage)
 
 
-#### [DEMO](https://php-project-57-64tp.onrender.com/)
-
 ### Requirements
 * PHP ^8.2
 * Composer ^2.7
